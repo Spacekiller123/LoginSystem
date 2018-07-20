@@ -80,17 +80,6 @@ public class LoginListener implements Listener {
 					if (cfg.getBoolean("Session." + player.getName() + ".Use") || plugin.data.getSessionId(player.getUniqueId().toString()).equalsIgnoreCase(player.getUniqueId().toString())) {
 						if (cfg.getString("Session." + player.getName() + ".UUID").equals(player.getUniqueId().toString()) || plugin.data.getSessionId(player.getUniqueId().toString()).equalsIgnoreCase(player.getUniqueId().toString())) {
 							if (cfg.getString("Session." + player.getName() + ".IP").equals(player.getAddress().getAddress().toString()) || plugin.data.getSessionIp(player.getAddress().getAddress().toString()).equalsIgnoreCase(player.getAddress().getAddress().toString())) {
-								/**
-								List<String> ls  = new ArrayList<String>();
-								player.updateInventory();
-								ls.add("Hiermit wählst du den Server aus");
-								player.getInventory().setItem(8, setName(new ItemStack(Material.COMPASS), "§9Serverauswahl", ls));
-								List<String> ls2  = new ArrayList<String>();
-								player.updateInventory();
-								ls2.add("Hiermit wählst du deine Partikel aus");
-								player.getInventory().setItem(4, setName(new ItemStack(Material.CHEST), "§9Partikelauswahl", ls2));
-								player.updateInventory();
-								**/
 								plugin.authList.remove(name);
 								Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 									public int high = 2;

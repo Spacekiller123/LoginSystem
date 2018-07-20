@@ -89,7 +89,6 @@ public class LoginSystem extends JavaPlugin {
 		config.options().copyDefaults(true);
 		saveConfig();
 
-		//intalize fields
 		instance = (LoginSystem) pm.getPlugin("LoginSystem");
 		prefix = config.getString("settings.table prefix");
 		data = this.getDataManager(config, "users.db");
@@ -121,25 +120,20 @@ public class LoginSystem extends JavaPlugin {
 		thread.startMainTask();
 		thread.startMsgTask();
 
-		//convert everything
 		this.checkConverter();
 
-		//register events
 		pm.registerEvents(new LoginListener(this), this);
 		this.registerCommands();
 
-		//clear old config
 		if (config.contains("options")) {
 			config.set("options", null);
 			this.saveConfig();
 		}
 		
-		// Filter logs
 		serverLog = this.getServer().getLogger();
 		commandFilter.prevFilter = log.getFilter();
 		serverLog.setFilter(commandFilter);
 
-		// Read from old auth list file
 		try {
 			authList = loadAuthList();
 		} catch (IOException ex) {
@@ -163,7 +157,6 @@ public class LoginSystem extends JavaPlugin {
 		serverLog.setFilter(commandFilter.prevFilter);
 		commandFilter.prevFilter = null;
 
-		// Save auth list to file so that it survives a reload
 		try {
 			saveAuthList(authList);
 		} catch (IOException ex) {
@@ -264,7 +257,6 @@ public class LoginSystem extends JavaPlugin {
 	public void playerJoinPrompt(final Player player) {
 		String uuid = player.getUniqueId().toString().replaceAll("-", "");
 		
-		//Quick System check
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			if(player != p && player.getName().equalsIgnoreCase(p.getName())) {
 				player.kickPlayer("§8§l[&9&lLogin&8&l] §r§7 Du bist schon unter dem Namen: " + p.getName() + " eingeloggt.");
@@ -307,11 +299,10 @@ public class LoginSystem extends JavaPlugin {
 		if (spawntp) {
 			if (loginLocations.containsKey(name)) {
 				Location fixedLocation = loginLocations.remove(name);
-				fixedLocation.add(0, 0.2, 0); // fix for players falling into ground
+				fixedLocation.add(0, 0.2, 0); 
 				player.teleport(fixedLocation);
 			}
 		}
-		// ensure that player does not drown after logging in
 		player.setRemainingAir(player.getMaximumAir());
 	}
 }
