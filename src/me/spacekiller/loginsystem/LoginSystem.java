@@ -164,6 +164,19 @@ public class LoginSystem extends JavaPlugin {
 		}
 
 	}
+	
+	public FileConfiguration getSessionConfig() {
+		return cfg;
+	}
+	
+	public void saveSessionConfig() {
+		try {
+			cfg.save(session);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void saveAuthList(Map<String, Boolean> map) throws IOException {
 		File file = new File(this.getDataFolder(), "authList");

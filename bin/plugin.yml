@@ -1,0 +1,27 @@
+name: LoginSystem
+version: 3.0.10
+main: me.spacekiller.loginsystem.LoginSystem
+author: Spacekiller
+softdepend: [xAuth]
+commands:
+  login:
+    description: Logge dich mit deinem Account an
+    usage: /login <password>
+  register:
+    description: Registriert dich dem Server
+    usage: /register <password>
+  changepass:
+    description: Ändert das Passwort von deinem Account
+    usage: /changepass <old> <new>
+  rmpass:
+    description: Entfernt das Passwort von deinem Account
+    usage: /rmpass <password>
+  logout:
+    description: Logout
+    usage: /logout
+  session:
+    description: Session
+    usage: /session
+  ls:
+    description: LoginSystem
+    usage: /lac

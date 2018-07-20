@@ -59,16 +59,6 @@ public class LoginCommand implements CommandExecutor {
 			plugin.thread.timeout.remove(name);
 			plugin.rehabPlayer(player, name);
 			player.sendMessage("§8§l[§9§lLogin§8§l] §r§7Erfolgreich eingeloggt!");
-			//lobby
-			List<String> ls  = new ArrayList<String>();
-			player.updateInventory();
-			ls.add("Hiermit wählst du den Server aus");
-			player.getInventory().setItem(8, setName(new ItemStack(Material.COMPASS), "§9Serverauswahl", ls));
-			List<String> ls2  = new ArrayList<String>();
-			player.updateInventory();
-			ls2.add("Hiermit wählst du deine Partikel aus");
-			player.getInventory().setItem(4, setName(new ItemStack(Material.CHEST), "§9Partikelauswahl", ls2));
-			player.updateInventory();
 			//Session
 			File session = new File("plugins/LoginSystem", "Session.yml");
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(session);

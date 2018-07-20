@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import me.spacekiller.loginsystem.LoginSystem;
 import me.spacekiller.loginsystem.data.DataManager;
+import me.spacekiller.loginsystem.util.EncryptionUtil;
 import me.spacekiller.loginsystem.util.UUIDFetcher;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,8 +26,7 @@ public class AdminCommand implements CommandExecutor {
 				sender.sendMessage(ChatColor.GREEN + "/ls rmpass <user>");
 				sender.sendMessage(ChatColor.GREEN + "/ls reload");
 				return true;
-			}
-			if ((args.length >= 3) && (args[0].equalsIgnoreCase("changepass"))) {
+			}else if ((args.length >= 3) && (args[0].equalsIgnoreCase("changepass"))) {
 				String user = args[1].toLowerCase();
 				String uuid = Bukkit.getOfflinePlayer(user).getUniqueId().toString().replaceAll("-", "");
 				if ((uuid !=null) && (!uuid.isEmpty()) && (plugin.data.isRegistered(uuid))) {
@@ -38,8 +38,7 @@ public class AdminCommand implements CommandExecutor {
 					sender.sendMessage("§8§l[§9§lLogin§8§l] §r§7Ungültiger Name oder der Spieler ist nicht registriert");
 				}
 				return true;
-			}
-			if ((args.length >= 2) && (args[0].equalsIgnoreCase("rmpass"))) {
+			} else if ((args.length >= 2) && (args[0].equalsIgnoreCase("rmpass"))) {
 				String user = args[1].toLowerCase();
 				String uuid = Bukkit.getOfflinePlayer(user).getUniqueId().toString().replaceAll("-", "");
 				if ((uuid != null) && (!uuid.isEmpty()) && (plugin.data.isRegistered(uuid))) {
@@ -50,23 +49,23 @@ public class AdminCommand implements CommandExecutor {
 					sender.sendMessage("§8§l[§9§lLogin§8§l] §r§7Ungültiger Name oder der Spieler ist nicht registriert");
 				}
 				return true;
-			} 
-			if ((args.length >= 2) && (args[0].equalsIgnoreCase("getpw"))) {
+			} else if ((args.length >= 2) && (args[0].equalsIgnoreCase("getpw") && sender.hasPermission("ls.admin.special"))) {
 				String user = args[1].toLowerCase();
 				String uuid = Bukkit.getOfflinePlayer(user).getUniqueId().toString().replace("-", "");
 				DataManager data = plugin.data;
 				String realpass = data.getPassword(uuid);
 				sender.sendMessage("§8§l[§9§lLogin§8§l] §r§7Das Passwort von §9" + user + " §7ist §9" + realpass);
 				return true;
-			}else {
-				sender.sendMessage("§8§l[§9§lLogin§8§l] §r§7Ungültiger Name oder der Spieler ist nicht registriert");
-			}
-			if ((args.length >= 1) && (args[0].equalsIgnoreCase("reload"))) {
+			}else if ((args.length >= 1) && (args[0].equalsIgnoreCase("reload"))) {
 				plugin.reloadConfig();
 				sender.sendMessage("§8§l[§9§lLogin§8§l] §r§7Plugin neugeladen!");
 				return true;
+			}else {
+				sender.sendMessage(ChatColor.GREEN + "/ls changepass <user> <pass>");
+				sender.sendMessage(ChatColor.GREEN + "/ls rmpass <user>");
+				sender.sendMessage(ChatColor.GREEN + "/ls reload");
+				return true;
 			}
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}return true;
