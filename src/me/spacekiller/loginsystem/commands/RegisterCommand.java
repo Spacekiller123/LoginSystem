@@ -45,7 +45,6 @@ public class RegisterCommand implements CommandExecutor{
 			player.sendMessage("§8§l[§9§lLogin§8§l] §r§7Benutzung: " + cmd.getUsage());
 			return true;
 		}
-
 		String password = plugin.hasher.hash(args[0]);
 		plugin.data.register(uuid, password, plugin.hasher.getTypeId(), player.getAddress().getAddress().toString());
 		plugin.authList.remove(name);

@@ -76,10 +76,10 @@ public class LoginListener implements Listener {
 			return;
 		} if (plugin.sesUse) {
 			if (cfg.contains("Session." + player.getName())) {
-				if (cfg.contains("Session." + player.getName()) || plugin.data.getSessionId(player.getUniqueId().toString()).equalsIgnoreCase(player.getUniqueId().toString())) {
-					if (cfg.getBoolean("Session." + player.getName() + ".Use") || plugin.data.getSessionId(player.getUniqueId().toString()).equalsIgnoreCase(player.getUniqueId().toString())) {
-						if (cfg.getString("Session." + player.getName() + ".UUID").equals(player.getUniqueId().toString()) || plugin.data.getSessionId(player.getUniqueId().toString()).equalsIgnoreCase(player.getUniqueId().toString())) {
-							if (cfg.getString("Session." + player.getName() + ".IP").equals(player.getAddress().getAddress().toString()) || plugin.data.getSessionIp(player.getAddress().getAddress().toString()).equalsIgnoreCase(player.getAddress().getAddress().toString())) {
+				if (cfg.contains("Session." + player.getName())) {
+					if (cfg.getBoolean("Session." + player.getName() + ".Use")) {
+						if (cfg.getString("Session." + player.getName() + ".UUID").equals(player.getUniqueId().toString())) {
+							if (cfg.getString("Session." + player.getName() + ".IP").equals(player.getAddress().getAddress().toString())) {
 								plugin.authList.remove(name);
 								Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 									public int high = 2;
@@ -96,6 +96,9 @@ public class LoginListener implements Listener {
 								, 0L, 20L);
 								return;
 							}else {
+								plugin.authList.put(name, false);
+								plugin.debilitatePlayer(player, name, true);
+								plugin.thread.getSession().remove(name);
 								System.out.println("IP");
 								System.out.println(cfg.getString("Session." + player.getName()+ ".IP"));
 								System.out.println(player.getAddress().toString());
@@ -107,8 +110,12 @@ public class LoginListener implements Listener {
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
+								player.sendMessage("§8§l[§9§lLogin§8§l] §r§7Deine Session ist leider abgelaufen.");
 							}
 						}else {
+							plugin.authList.put(name, false);
+							plugin.debilitatePlayer(player, name, true);
+							plugin.thread.getSession().remove(name);
 							System.out.println("UUID");
 							System.out.println(cfg.getString("Session." + player.getName()+ ".UUID"));
 							System.out.println(player.getUniqueId().toString());
@@ -119,6 +126,7 @@ public class LoginListener implements Listener {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
+							player.sendMessage("§8§l[§9§lLogin§8§l] §r§7Deine Session ist leider abgelaufen.");
 						}
 					}
 				}

@@ -25,3 +25,5 @@ commands:
   ls:
     description: LoginSystem
     usage: /lac
+  authlist:
+    description: Test
