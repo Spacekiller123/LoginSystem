@@ -44,8 +44,8 @@ public class SessionCommand implements CommandExecutor {
 				p.sendMessage("§8§l[§9§lLogin§8§l] §r§7Session-Funktion eingeschaltet");
 				p.sendMessage("§8§l[§9§lLogin§8§l] §r§7Deine IP und UUID wurden gespeichert.");
 				p.sendMessage("§8§l[§9§lLogin§8§l] §r§7Die Session läuft aus, wenn du eine andere IP hast oder wenn der Server neustartet");
-				p.sendMessage("§8§l[§9§lLogin§8§l] §r§7UUID: §9" + p.getUniqueId().toString());
-				p.sendMessage("§8§l[§9§lLogin§8§l] §r§7Aktuelle IP: §9" + p.getAddress().getAddress().toString());
+				//p.sendMessage("§8§l[§9§lLogin§8§l] §r§7UUID: §9" + p.getUniqueId().toString());
+				//p.sendMessage("§8§l[§9§lLogin§8§l] §r§7Aktuelle IP: §9" + p.getAddress().getAddress().toString());
 				String uuid = p.getUniqueId().toString().replace("-", "");
 				plugin.data.session(p.getUniqueId().toString(), "1234");
 				try {
